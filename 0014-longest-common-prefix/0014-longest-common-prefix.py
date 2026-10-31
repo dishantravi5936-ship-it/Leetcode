@@ -1,23 +1,18 @@
 class Solution(object):
     def longestCommonPrefix(self, strs):
-        """
-        :type strs: List[str]
+        """:type strs: List[str]
         :rtype: str
         """
         if not strs:
             return ""
         
-        # Sort the array of strings
-        strs.sort()
-        
-        # The common prefix of the whole array must be a common prefix 
-        # between the alphabetically first and last strings in the sorted array.
-        first = strs[0]
-        last = strs[-1]
-        
-        min_len = min(len(first), len(last))
-        for i in range(min_len):
-            if first[i] != last[i]:
-                return first[:i]
-                
-        return first[:min_len]
+        # Iterate through the indices of the first string
+        for i in range(len(strs[0])):
+            char = strs[0][i]
+            # Check this character against all other strings
+            for j in range(1, len(strs)):
+                # If we reach the end of any string or a character doesn't match
+                if i >= len(strs[j]) or strs[j][i] != char:
+                    return strs[0][:i]
+                    
+        return strs[0]
